@@ -19,7 +19,7 @@
         [
             "@semantic-release/changelog",
             {
-                "changelogTitle": "# Changelog @aiyune/chat\n\n 👋Hello! This is where all important project changes are recorded. \n📌The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)."
+                "changelogTitle": "# Changelog @aiyune/chat-aigc\n\n 👋Hello! This is where all important project changes are recorded. \n📌The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)."
             }
         ],
         "@semantic-release/npm",
