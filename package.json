@@ -1,6 +1,6 @@
 {
   "name": "@aiyune/chat-aigc",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "🔥An open-source chat application, high-performance chatbot framework support many llm plugins💪",
   "author": "Yumeio",
   "license": "Apache-2.0",
