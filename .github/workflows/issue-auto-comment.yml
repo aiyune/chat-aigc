@@ -1,0 +1,83 @@
+name: Issue Auto Comment
+
+on:
+  issues:
+    types:
+      - opened
+      - closed
+      - assigned
+  pull_request_target:
+    types:
+      - opened
+      - closed
+
+permissions: 
+  contents: read
+
+jobs:
+  run:
+    permissions: 
+      issues: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto comment for Issues opened
+        uses: wow-actions/auto-comment@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          issuesOpened: |
+            🎉 **@{{ author }}**
+
+            <details>
+              <summary>🚀 Thanks for opening this issue! 🚀</summary>
+              If you have any more questions, feel free to ask. 🤗
+              We are happy to help you! 🎉
+            </details>
+
+      - name: Auto comment for Issues closed
+        uses: wow-actions/auto-comment@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          issuesClosed: |
+            🎉 **@{{ author }}**
+
+            <details>
+              <summary>🚀 Thanks for closing this issue! 🚀</summary>
+              If you have any more questions, feel free to ask. 🤗
+              We are happy to help you! 🎉
+            </details>
+
+      - name: Auto comment for Pull Requests opened
+        uses: wow-actions/auto-comment@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          pullRequestOpened: |
+            🎉 **@{{ author }}**
+
+            <details>
+              <summary>🚀 Thanks for opening this pull request! 🚀</summary>
+              If you have any more questions, feel free to ask. 🤗
+              We are happy to help you! 🎉
+            </details>
+
+      - name: Auto comment for Pull Requests merged
+        uses: actions-cool/pr-welcome@main
+        if: github.event.pull_request.merged == true
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          comment: |
+            🙏 **@${{ github.event.pull_request.user.login }}** 🙏
+            
+            **Congratulations on merging this pull request!** 🚀
+            Thanks for your contribution to our Community! 🎉
+            If you have any more questions, feel free to ask. 🤗
+            We are happy to help you! 🎉
+        
+      - name: Remote inactive
+        if: github.event.issue.state == 'open' && github.actor == github.event.issue.user.login
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: 'remove-labels'
+          token: ${{ secrets.GH_TOKEN }}
+          issue-number: ${{ github.event.issue.number }}
+          labels: 'Inactive'
